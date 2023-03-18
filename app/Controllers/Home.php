@@ -6,7 +6,7 @@ class Home extends Controller
 {
     public function index()
     {
-        // listar
+        echo $this->blade()->run('home.index');
     }
 
     public function store($data)

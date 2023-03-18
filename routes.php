@@ -10,7 +10,7 @@
 $router = new \Bramus\Router\Router();
 
 $router->setNamespace('\App\Controllers');
-$router->get('/home', 'Home@index');
+$router->get('/', 'Home@index');
 $router->get('/produto', 'Produto@index');
 
 $router->run();

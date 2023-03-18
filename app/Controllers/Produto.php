@@ -6,7 +6,7 @@ class Produto extends Controller
 {
     public function index()
     {
-        // listar
+        echo $this->blade()->run('produto.index');
     }
 
     public function store($data)
