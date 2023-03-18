@@ -2,10 +2,10 @@
 
 namespace App\Controllers;
 
-class Produto extends Controller
+class Home extends Controller
 {
     public function index()
     {
-        echo 'Produto Controller';
+        echo 'Home Controller';
     }
 }
