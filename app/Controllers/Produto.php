@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-class Produto 
+class Produto
 {
     public function __construct()
     {
