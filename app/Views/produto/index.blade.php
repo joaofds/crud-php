@@ -1,12 +1,65 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Produto Controller</h1>
-</body>
-</html>
+@extends('template.main')
+ 
+@section('title', '..::Produtos::..')
+ 
+@section('content')
+<div class="card mt-5">
+  <div class="card-header">
+    <h4 class="float-start">Produtos</h4>
+    <div class="float-end">
+        <a href="/produto/novo" class="btn btn-primary"><i class="fa fa-plus"></i></a>
+    </div>
+  </div>
+  <div class="card-body">
+  <table id="produtos" class="table table-striped" style="width:100%">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Position</th>
+                <th>Office</th>
+                <th>Age</th>
+                <th>Start date</th>
+                <th>Salary</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Tiger Nixon</td>
+                <td>System Architect</td>
+                <td>Edinburgh</td>
+                <td>61</td>
+                <td>2011-04-25</td>
+                <td>$320,800</td>
+            </tr>
+            <tr>
+                <td>Garrett Winters</td>
+                <td>Accountant</td>
+                <td>Tokyo</td>
+                <td>63</td>
+                <td>2011-07-25</td>
+                <td>$170,750</td>
+            </tr>
+
+        </tbody>
+        <tfoot>
+            <tr>
+                <th>Name</th>
+                <th>Position</th>
+                <th>Office</th>
+                <th>Age</th>
+                <th>Start date</th>
+                <th>Salary</th>
+            </tr>
+        </tfoot>
+    </table>
+  </div>
+</div>
+@endsection
+
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+            //
+        });
+    </script>
+@endpush
