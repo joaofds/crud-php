@@ -5,7 +5,7 @@
 @section('content')
 <div class="card mt-5">
   <div class="card-header">
-    <h4 class="float-start">Cadastrar Categorias</h4>
+    <h4 class="float-start">Cadastro de Categoria</h4>
     <div class="float-end">
         <a href="/categorias" class="btn btn-secondary">Voltar</a>
     </div>
@@ -16,6 +16,11 @@
             <div class="mb-3 mt-3">
                 <label for="categoria" class="form-label">Nome da Categoria:</label>
                 <input type="text" class="form-control" id="categoria" name="categoria" />
+            </div>
+
+            <div class="mb-3 mt-3">
+                <label for="percentual" class="form-label">Percentual:</label>
+                <input type="number" class="form-control" id="percentual" name="percentual" min="0" max="10000" />
             </div>
             <button type="button" id="salvar" class="btn btn-success mt-3 float-end">Salvar</button>
         </div>
@@ -30,16 +35,16 @@
             //
         });
 
-        
         $("#salvar").on('click', function() {
-            if (!$("#categoria").val()) {
+            if (!$("#categoria").val() || !$("#percentual").val()) {
                 alert('Antes de enviar preencha todos os campos')
             } else {
                 $.ajax({
                     method: "POST",
                     url: "/categorias/salvar",
                     data: { 
-                        categoria: $("#categoria").val()
+                        categoria: $("#categoria").val(),
+                        percent: $("#percentual").val()
                     }
                 })
                 .done(function(response) {

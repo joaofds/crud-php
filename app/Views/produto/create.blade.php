@@ -5,7 +5,7 @@
 @section('content')
 <div class="card mt-5">
   <div class="card-header">
-    <h4 class="float-start">Cadastrar Produto</h4>
+    <h4 class="float-start">Cadastro de Produto</h4>
     <div class="float-end">
         <a href="/produtos" class="btn btn-secondary">Voltar</a>
     </div>
@@ -29,7 +29,7 @@
             </div>
 
             <select id="tipo" class="form-select">
-                <option selected>Selecione a categoria...</option>
+                <option value="" selected>Selecione a categoria...</option>
                 <option value="1">One</option>
                 <option value="2">Two</option>
                 <option value="3">Three</option>
@@ -48,20 +48,25 @@
             //
         });
 
+        
         $("#salvar").on('click', function() {
-            $.ajax({
-                method: "POST",
-                url: "/produtos/store",
-                data: { 
-                    produto: $("#produto").val(),
-                    preco: $("#preco").val(),
-                    qtde: $("#qtde").val(),
-                    tipo: $("#tipo").val()
-                }
-            })
-            .done(function(response) {
-                alert(response);
-            });
+            if (!$("#produto").val() || !$("#preco").val() || !$("#qtde").val() || ($("#tipo").val() == "")) {
+                alert('Preencha todos os campos')
+            } else {    
+                $.ajax({
+                    method: "POST",
+                    url: "/produtos/salvar",
+                    data: { 
+                        produto: $("#produto").val(),
+                        preco: $("#preco").val(),
+                        qtde: $("#qtde").val(),
+                        tipo: $("#tipo").val()
+                    }
+                })
+                .done(function(response) {
+                    alert(response);
+                });
+            }
         });
     </script>
 @endpush
