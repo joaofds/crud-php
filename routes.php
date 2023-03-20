@@ -10,7 +10,18 @@
 $router = new \Bramus\Router\Router();
 
 $router->setNamespace('\App\Controllers');
+
+// HOME
 $router->get('/', 'Home@index');
-$router->get('/produto', 'Produto@index');
+
+// PRODUTO
+$router->get('/produtos', 'Produto@index');
+$router->get('/produtos/cadastrar', 'Produto@create');
+$router->post('/produtos/salvar', 'Produto@store');
+
+// CATEGORIAS
+$router->get('/categorias', 'Categoria@index');
+$router->get('/categorias/cadastrar', 'Categoria@create');
+$router->post('/categorias/salvar', 'Categoria@store');
 
 $router->run();

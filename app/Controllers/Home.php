@@ -9,18 +9,23 @@ class Home extends Controller
         echo $this->blade()->run('home.index');
     }
 
-    public function store($data)
+    public function create()
     {
-        // salvar
+        //
     }
 
-    public function show($id)
+    public function store()
     {
-        // mostra por id
+        //
     }
 
-    public function delete($id)
+    public function show()
     {
-        // deleta por id
+        //
+    }
+
+    public function delete()
+    {
+        //
     }
 }

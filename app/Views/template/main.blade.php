@@ -25,11 +25,10 @@
             <ul class="navbar-nav">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Produtos
+                        Produto
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <li><a class="dropdown-item" href="/produto/novo">Cadastrar Produto</a></li>
-                        <li><a class="dropdown-item" href="/produto">Listar Produtos</a></li>
+                        <li><a class="dropdown-item" href="/produtos">Produtos</a></li>
                         <li><a class="dropdown-item" href="/categorias">Categorias</a></li>
                     </ul>
                 </li>
@@ -45,7 +44,7 @@
 <!-- JS -->
 <script src="/js/jquery-3.5.1.js"></script>
 <script src="/js/bootstrap.bundle.min.js"></script>
-<script src="/js/dataTables.bootstrap5.min.js"></script>
+<!-- <script src="/js/dataTables.bootstrap5.min.js"></script> -->
 <script src="/js/jquery.dataTables.min.js"></script>
 <script src="/js/app.js"></script>
 

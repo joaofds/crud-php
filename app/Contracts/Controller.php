@@ -6,9 +6,11 @@ interface Controller
 {
     public function index();
 
-    public function store($data);
+    public function create();
 
-    public function show($id);
+    public function store();
 
-    public function delete($id);
+    public function show();
+
+    public function delete();
 }

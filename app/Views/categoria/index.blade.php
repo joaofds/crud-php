@@ -1,17 +1,17 @@
 @extends('template.main')
  
-@section('title', '..::Produtos::..')
+@section('title', '..::Categorias::..')
  
 @section('content')
 <div class="card mt-5">
   <div class="card-header">
-    <h4 class="float-start">Produtos</h4>
+    <h4 class="float-start">Categorias</h4>
     <div class="float-end">
-        <a href="/produtos/cadastrar" class="btn btn-primary"><i class="fa fa-plus"></i></a>
+        <a href="/categorias/cadastrar" class="btn btn-primary"><i class="fa fa-plus"></i></a>
     </div>
   </div>
   <div class="card-body">
-  <table id="produtos" class="table table-striped" style="width:100%">
+  <table id="categorias" class="table table-striped" style="width:100%">
         <thead>
             <tr>
                 <th>Name</th>
