@@ -2,6 +2,9 @@
 
 namespace App\Models;
 
-class Produto
+use App\Database\ActiveRecord;
+use App\Database\Transaction;
+
+class Produto extends ActiveRecord
 {
 }

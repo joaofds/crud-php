@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use CoffeeCode\DataLayer\DataLayer;
+use App\Database\ActiveRecord;
+use App\Database\Transaction;
 
-class Categoria extends DataLayer
+class Categoria extends ActiveRecord
 {
 }
