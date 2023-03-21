@@ -1,3 +1,7 @@
 table tr {
     text-transform: capitalize;
 }
+
+select, select > option {
+    text-transform: capitalize;
+}

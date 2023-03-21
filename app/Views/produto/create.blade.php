@@ -28,11 +28,11 @@
                 <input type="number" class="form-control" id="qtde" name="qtde" min="1" max="10000" />
             </div>
 
-            <select id="tipo" class="form-select">
+            <select id="categoria" class="form-select">
                 <option value="" selected>Selecione a categoria...</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
+                @foreach($categorias as $categoria)
+                    <option value="{{ $categoria->id }}">{{ $categoria->nome }}</option>
+                @endforeach
             </select>
 
             <button type="button" id="salvar" class="btn btn-success mt-3 float-end">Salvar</button>
@@ -50,7 +50,7 @@
 
         
         $("#salvar").on('click', function() {
-            if (!$("#produto").val() || !$("#preco").val() || !$("#qtde").val() || ($("#tipo").val() == "")) {
+            if (!$("#produto").val() || !$("#preco").val() || !$("#qtde").val() || ($("#categoria").val() == "")) {
                 alert('Preencha todos os campos')
             } else {    
                 $.ajax({
@@ -60,7 +60,7 @@
                         produto: $("#produto").val(),
                         preco: $("#preco").val(),
                         qtde: $("#qtde").val(),
-                        tipo: $("#tipo").val()
+                        categoria: $("#categoria").val()
                     }
                 })
                 .done(function(response) {
