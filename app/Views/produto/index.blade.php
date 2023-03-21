@@ -22,15 +22,15 @@
             </tr>
         </thead>
         <tbody>
-            <!-- @foreach($produtos as $produto)
+            @foreach($produtos as $produto)
                 <tr>
                     <td>{{ $produto->id }}</td>
                     <td>{{ $produto->nome }}</td>
-                    <td>{{ $produto->valor }}</td>
+                    <td>R$ {{ $produto->valor }}</td>
                     <td>{{ $produto->qtde }}</td>
-                    <td>{{ $produto->categoria_id }}</td>
+                    <td>{{ $produto->categoria }}</td>
                 </tr>
-            @endforeach -->
+            @endforeach
         </tbody>
         <tfoot>
         <tr>

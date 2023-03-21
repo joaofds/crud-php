@@ -7,4 +7,23 @@ use App\Database\Transaction;
 
 class Categoria extends ActiveRecord
 {
+    public const TABLENAME = 'categorias';
+
+    /**
+     * Busca todas as categorias
+     *
+     * @return object
+     */
+    public static function getCategorias()
+    {
+        $conn = Transaction::get();
+
+        $sql = 'select * from categorias';
+
+        $prepare = $conn->prepare($sql);
+        $prepare->execute();
+        $produtos = $prepare->fetchAll();
+
+        return $produtos;
+    }
 }

@@ -2,13 +2,24 @@
 
 namespace App\Controllers;
 
+use App\Database\Transaction;
 use App\Models\Produto as ProdutoModel;
 
 class Produto extends Controller
 {
     public function index()
     {
-        echo $this->blade()->run('produto.index');
+        try {
+            Transaction::open();
+
+            $produtos = ProdutoModel::getProductos();
+
+            Transaction::close();
+        } catch (\Throwable $th) {
+            Transaction::rollback();
+        }
+
+        echo $this->blade()->run('produto.index', ['produtos' => $produtos]);
     }
 
     public function create()

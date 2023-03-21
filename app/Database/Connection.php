@@ -11,9 +11,12 @@ class Connection
     public static function getConnetion()
     {
         if (!self::$connection) {
-            self::$connection = new PDO('mysql:host=localhost;dbname=blog_ci', 'root', '', [
-                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ
-            ]);
+            self::$connection = new PDO(
+                DATA_LAYER_CONFIG['driver'] . ':host=' . DATA_LAYER_CONFIG['host'] . ';dbname=' . DATA_LAYER_CONFIG['dbname'] . ';port=' . DATA_LAYER_CONFIG['port'],
+                DATA_LAYER_CONFIG['username'],
+                DATA_LAYER_CONFIG['passwd'],
+                DATA_LAYER_CONFIG['options']
+            );
         }
 
         return self::$connection;

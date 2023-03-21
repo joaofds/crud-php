@@ -2,7 +2,7 @@
 
 namespace App\Database;
 
-use app\database\Connection;
+use App\Database\Connection;
 use PDO;
 
 class Transaction
