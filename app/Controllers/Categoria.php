@@ -44,8 +44,37 @@ class Categoria extends Controller
      */
     public function store()
     {
-        $categoria = json_decode(json_encode($_REQUEST), false);
-        echo json_encode($categoria);
+        $request = json_decode(json_encode($_REQUEST), false);
+
+        try {
+            Transaction::open();
+
+            $categoria = new CategoriaModel();
+            $categoria->nome = $request->categoria;
+            $categoria->percentual = (float) $request->percentual;
+            $categoria->data_cadastro = (new \DateTime('now'))->format('Y-m-d H:i:s');
+            $saved = $categoria->save();
+
+            header('Content-Type: application/json');
+            if ($saved) {
+                echo json_encode(
+                    [
+                        'msg' => 'Categoria salva com sucesso.',
+                        'code' => 200
+                    ]
+                );
+            } else {
+                echo json_encode(
+                    [
+                        'msg' => 'Oops... erro ao salvar categoria.',
+                    ]
+                );
+            }
+
+            Transaction::close();
+        } catch (\Throwable $th) {
+            Transaction::rollback();
+        }
     }
 
     /**

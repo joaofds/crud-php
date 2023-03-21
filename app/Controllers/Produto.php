@@ -53,7 +53,8 @@ class Produto extends Controller
             $produto->data_cadastro = (new \DateTime('now'))->format('Y-m-d H:i:s');
             $saved = $produto->save();
 
-            if (!$saved) {
+            header('Content-Type: application/json');
+            if ($saved) {
                 echo json_encode(
                     [
                         'msg' => 'Produto salvo com sucesso.',

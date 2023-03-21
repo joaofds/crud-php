@@ -64,7 +64,12 @@
                     }
                 })
                 .done(function(response) {
-                    alert(response);
+                    if(response.code == 200) {
+                        alert(response.msg)
+                        window.location = '/produtos'
+                    } else {
+                        alert(response.msg)
+                    }
                 });
             }
         });

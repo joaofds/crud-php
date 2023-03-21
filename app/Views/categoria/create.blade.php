@@ -14,8 +14,8 @@
     <form id="form-produto" class="d-flex justify-content-center align-itens-center">
         <div class="col-sm-12 col-md-6">
             <div class="mb-3 mt-3">
-                <label for="categoria" class="form-label">Nome da Categoria:</label>
-                <input type="text" class="form-control" id="categoria" name="categoria" />
+                <label for="nome" class="form-label">Nome da Categoria:</label>
+                <input type="text" class="form-control" id="nome" name="nome" />
             </div>
 
             <div class="mb-3 mt-3">
@@ -36,19 +36,24 @@
         });
 
         $("#salvar").on('click', function() {
-            if (!$("#categoria").val() || !$("#percentual").val()) {
+            if (!$("#nome").val() || !$("#percentual").val()) {
                 alert('Antes de enviar preencha todos os campos')
             } else {
                 $.ajax({
                     method: "POST",
                     url: "/categorias/salvar",
                     data: { 
-                        categoria: $("#categoria").val(),
-                        percent: $("#percentual").val()
+                        categoria: $("#nome").val(),
+                        percentual: $("#percentual").val()
                     }
                 })
                 .done(function(response) {
-                    alert(response);
+                    if(response.code == 200) {
+                        alert(response.msg)
+                        window.location = '/categorias'
+                    } else {
+                        alert(response.msg)
+                    }
                 });
             }
         });
