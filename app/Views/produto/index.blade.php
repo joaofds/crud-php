@@ -14,41 +14,31 @@
   <table id="produtos" class="table table-striped" style="width:100%">
         <thead>
             <tr>
-                <th>Name</th>
-                <th>Position</th>
-                <th>Office</th>
-                <th>Age</th>
-                <th>Start date</th>
-                <th>Salary</th>
+                <th>#</th>
+                <th>Produto</th>
+                <th>Preço</th>
+                <th>Qtde</th>
+                <th>Categoria</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>Tiger Nixon</td>
-                <td>System Architect</td>
-                <td>Edinburgh</td>
-                <td>61</td>
-                <td>2011-04-25</td>
-                <td>$320,800</td>
-            </tr>
-            <tr>
-                <td>Garrett Winters</td>
-                <td>Accountant</td>
-                <td>Tokyo</td>
-                <td>63</td>
-                <td>2011-07-25</td>
-                <td>$170,750</td>
-            </tr>
-
+            <!-- @foreach($produtos as $produto)
+                <tr>
+                    <td>{{ $produto->id }}</td>
+                    <td>{{ $produto->nome }}</td>
+                    <td>{{ $produto->valor }}</td>
+                    <td>{{ $produto->qtde }}</td>
+                    <td>{{ $produto->categoria_id }}</td>
+                </tr>
+            @endforeach -->
         </tbody>
         <tfoot>
-            <tr>
-                <th>Name</th>
-                <th>Position</th>
-                <th>Office</th>
-                <th>Age</th>
-                <th>Start date</th>
-                <th>Salary</th>
+        <tr>
+                <th>#</th>
+                <th>Produto</th>
+                <th>Preço</th>
+                <th>Qtde</th>
+                <th>Categoria</th>
             </tr>
         </tfoot>
     </table>

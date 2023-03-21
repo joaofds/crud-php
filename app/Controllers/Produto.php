@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 
+use App\Models\Produto as ProdutoModel;
+
 class Produto extends Controller
 {
     public function index()
