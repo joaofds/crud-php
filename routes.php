@@ -24,4 +24,9 @@ $router->get('/categorias', 'Categoria@index');
 $router->get('/categorias/cadastrar', 'Categoria@create');
 $router->post('/categorias/salvar', 'Categoria@store');
 
+// VENDAS
+$router->get('/vendas', 'Venda@index');
+$router->get('/vendas/cadastrar', 'Venda@create');
+$router->post('/vendas/salvar', 'Venda@store');
+
 $router->run();

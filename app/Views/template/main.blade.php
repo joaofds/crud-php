@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/font-awesome.min.css">
     <link rel="stylesheet" href="/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="/css/select2.min.css">
+    <link rel="stylesheet" href="/css/select2-bootstrap-5-theme.min.css">
     <link rel="stylesheet" href="/css/app.css">
     
     <title>@yield('title')</title>
@@ -32,6 +34,15 @@
                         <li><a class="dropdown-item" href="/categorias">Categorias</a></li>
                     </ul>
                 </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Venda
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <li><a class="dropdown-item" href="/vendas">Minhas Vendas</a></li>
+                        <li><a class="dropdown-item" href="/vendas/cadastrar">PDV</a></li>
+                    </ul>
+                </li>
             </ul>
             </div>
         </div>
@@ -46,6 +57,7 @@
 <script src="/js/bootstrap.bundle.min.js"></script>
 <!-- <script src="/js/dataTables.bootstrap5.min.js"></script> -->
 <script src="/js/jquery.dataTables.min.js"></script>
+<script src="/js/select2.full.min.js"></script>
 <script src="/js/app.js"></script>
 
 <!-- PUSH SCRIPTS -->
