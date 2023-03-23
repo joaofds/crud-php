@@ -29,5 +29,6 @@ $router->post('/categorias/salvar', 'Categoria@store');
 $router->get('/vendas', 'Venda@index');
 $router->get('/vendas/cadastrar', 'Venda@create');
 $router->post('/vendas/salvar', 'Venda@store');
+$router->post('/vendas/busca-itens', 'Venda@getItensByVenda');
 
 $router->run();

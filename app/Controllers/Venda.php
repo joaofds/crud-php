@@ -90,4 +90,33 @@ class Venda extends Controller
     {
         //
     }
+
+    /**
+     * Metodo que busca itens da venda pelo id.
+     *
+     * @return void
+     */
+    public function getItensByVenda()
+    {
+        $request = json_decode(json_encode($_REQUEST), false);
+
+        try {
+            Transaction::open();
+
+            // busca itens da venda pelo id
+            $itens = VendaItem::getItensByIdVenda($request->id);
+
+            header('Content-Type: application/json');
+            echo json_encode(
+                [
+                    'code' => 200,
+                    'data' => $itens
+                ]
+            );
+
+            Transaction::close();
+        } catch (\Throwable $th) {
+            Transaction::rollback();
+        }
+    }
 }

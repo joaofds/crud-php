@@ -40,7 +40,7 @@
                                 <i class="fa fa-gear"></i>
                                 </button>
                                 <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                                <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#itensVenda">Ver Produtos</a></li>
+                                <li class="ver-itens" data="{{ $venda->id }}"><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#itensVenda">Ver Produtos</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -72,7 +72,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        listagem de itens da venda...
+        listagem de itens da venda... (VER CONSOLE)
       </div>
     </div>
   </div>
@@ -85,6 +85,20 @@
             //
         });
 
-        
+        $(".ver-itens").on('click', function() {
+          let id_venda = $(this).attr('data');
+          $.ajax({
+                    method: "POST",
+                    url: "/vendas/busca-itens",
+                    data: { 
+                        id: id_venda
+                    }
+                })
+                .done(function(response) {
+                    if(response.code == 200) {
+                        console.log(response.data);
+                    }
+                });
+        });
     </script>
 @endpush
