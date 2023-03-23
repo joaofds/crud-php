@@ -17,6 +17,8 @@
                 <th>#</th>
                 <th>Nome</th>
                 <th>Percentual (%)</th>
+                <th>Data Cadastro</th>
+                <th>Ação</th>
             </tr>
         </thead>
         <tbody>
@@ -25,6 +27,20 @@
                     <td>{{ $categoria->id }}</td>
                     <td>{{ $categoria->nome }}</td>
                     <td>{{ $categoria->percentual }}</td>
+                    <td>{{ date('d/m/Y H:m', strtotime($categoria->data_cadastro))}}</td>
+                    <td>
+                        <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+                            <div class="btn-group" role="group">
+                                <button id="btnGroupDrop1" type="button" class="btn btn-sm btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fa fa-gear"></i>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#itensVenda">Remover</a></li>
+                                <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#itensVenda">Editar</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </td>
                 </tr>
             @endforeach
         </tbody>
@@ -33,6 +49,8 @@
                 <th>#</th>
                 <th>Nome</th>
                 <th>Percentual (%)</th>
+                <th>Data Cadastro</th>
+                <th>Ação</th>
             </tr>
         </tfoot>
     </table>

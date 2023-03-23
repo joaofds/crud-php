@@ -20,6 +20,7 @@
                 <th>Qtde</th>
                 <th>Categoria</th>
                 <th>Data Cadastro</th>
+                <th>Ação</th>
             </tr>
         </thead>
         <tbody>
@@ -32,6 +33,19 @@
                     <td>{{ $produto->qtde }}</td>
                     <td>{{ $produto->categoria }}</td>
                     <td>{{ date('d/m/Y H:m', strtotime($produto->data_cadastro))}}</td>
+                    <td>
+                        <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+                            <div class="btn-group" role="group">
+                                <button id="btnGroupDrop1" type="button" class="btn btn-sm btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fa fa-gear"></i>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#itensVenda">Remover</a></li>
+                                <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#itensVenda">Editar</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </td>
                 </tr>
             @endforeach
         </tbody>
@@ -43,6 +57,7 @@
                 <th>Qtde</th>
                 <th>Categoria</th>
                 <th>Data Cadastro</th>
+                <th>Ação</th>
             </tr>
         </tfoot>
     </table>
