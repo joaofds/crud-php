@@ -18,10 +18,10 @@ class Produto extends ActiveRecord
     {
         $conn = Transaction::get();
 
-        $sql = 'select A.nome, A.valor, A.qtde, B.nome as categoria
-                from produtos A
-                join categorias B on A.categoria_id = B.id
-        ';
+        $sql = 'select a.nome, a.valor, a.qtde, a.data_cadastro, b.nome as categoria
+                from produtos a
+                join categorias b
+                on a.categoria_id = B.id';
 
         $prepare = $conn->prepare($sql);
         $prepare->execute();

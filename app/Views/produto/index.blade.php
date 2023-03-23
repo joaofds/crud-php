@@ -19,6 +19,7 @@
                 <th>Preço</th>
                 <th>Qtde</th>
                 <th>Categoria</th>
+                <th>Data Cadastro</th>
             </tr>
         </thead>
         <tbody>
@@ -30,6 +31,7 @@
                     <td>R$ {{ $produto->valor }}</td>
                     <td>{{ $produto->qtde }}</td>
                     <td>{{ $produto->categoria }}</td>
+                    <td>{{ date('d/m/Y H:m', strtotime($produto->data_cadastro))}}</td>
                 </tr>
             @endforeach
         </tbody>
@@ -40,6 +42,7 @@
                 <th>Preço</th>
                 <th>Qtde</th>
                 <th>Categoria</th>
+                <th>Data Cadastro</th>
             </tr>
         </tfoot>
     </table>
