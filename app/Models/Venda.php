@@ -7,7 +7,7 @@ use App\Database\Transaction;
 
 class Venda extends ActiveRecord
 {
-    public const TABLENAME = 'categorias';
+    public const TABLENAME = 'vendas';
 
     /**
      * Busca todas as categorias

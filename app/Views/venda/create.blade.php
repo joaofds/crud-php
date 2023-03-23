@@ -35,8 +35,8 @@
             </div>
         </div>
         <div class="row">
-            <div class="col">
-                <table id="produtos" class="table table-striped" style="width:60%">
+            <div class="col-8">
+                <table id="produtos" class="table table-striped" style="width:100%">
                     <thead>
                         <tr>
                             <th>#</th>
@@ -62,6 +62,17 @@
                     </tfoot>
                 </table>
             </div>
+            <div class="col-4">
+                <div class="row">
+                    <div class="d-flex flex-column text-center">
+                        <h4 class="text-muted">Total</h4>
+                        <h2 class="total">R$: 0,00</h2>
+                    </div>
+                </div>
+                <div class="row">
+                    <button type="button" id="finalizar" class="btn btn-primary mt-3 float-end">Finalizar</button>
+                </div>
+            </div>
         </div>
     </form>
   </div>
@@ -74,6 +85,7 @@
         var produto = null;
         var produtos = [];
 
+        // atribui produto selecionado à variavel produto.
         $(document).ready(function() {
             // event on change do select
             $('#single-select-field').on('select2:select', function (e) {
@@ -88,10 +100,10 @@
             let qtde = $("#qtde").val();
 
             // produto atual
-            let preco = produto.preco;
-            let icms_und = ((produto.preco * produto.percentual) / 100).toFixed(2);
-            let icms_total = (((produto.preco * produto.percentual) / 100) * qtde).toFixed(2);
-            let total_itens = (produto.preco * qtde).toFixed(2);
+            let preco = produto?.preco;
+            let icms_und = (produto?.preco * produto?.percentual).toFixed(2);
+            let icms_total = ((produto?.preco * produto?.percentual) * qtde).toFixed(2);
+            let total_itens = (produto?.preco * qtde).toFixed(2);
             
             if (!produto || qtde == "") {
                 alert('Preencha todos os campos...')
@@ -129,6 +141,7 @@
                 // atualiza totais e limpa inputs
                 $('#total_icms').html('Total: ' + icms);
                 $('#total-produtos').html('Total: ' + total);
+                $('.total').html('R$: '+ total);
                 $("#single-select-field").empty();
                 $("#qtde").val('')
 
@@ -165,7 +178,7 @@
                         results: $.map(data, function (item) {
                             return {
                                 id: item.id,
-                                text: item.nome,
+                                text: item.nome.toUpperCase(),
                                 preco: item.valor,
                                 categoria: item.categoria,
                                 percentual: item.percentual
@@ -174,6 +187,32 @@
                         })
                     };
                 }
+            }
+        });
+
+        // ajax para envio da venda
+        $("#finalizar").on('click', function() {
+            if (!produtos.length) {
+                alert('Nenhum produto foi selecionado...')
+            } else {    
+                $.ajax({
+                    method: "POST",
+                    url: "/vendas/salvar",
+                    data: {
+                        //cliente_id: 2,
+                        total_venda: calculaTotal(produtos, 'total_itens'),
+                        total_imposto: calculaTotal(produtos, 'icms_total'),
+                        produtos: produtos
+                    }
+                })
+                .done(function(response) {
+                    if(response.code == 200) {
+                        alert(response.msg);
+                        window.location = '/vendas'
+                    } else {
+                        alert(response.msg)
+                    }
+                });
             }
         });
     </script>
