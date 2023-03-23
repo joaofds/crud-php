@@ -9,6 +9,11 @@ use App\Models\VendaItem;
 
 class Venda extends Controller
 {
+    /**
+     * Mostra view de vendas
+     *
+     * @return void
+     */
     public function index()
     {
         try {
@@ -24,11 +29,21 @@ class Venda extends Controller
         echo $this->blade()->run('venda.index', ['vendas' => $vendas]);
     }
 
+    /**
+     * Mostra view de pdv
+     *
+     * @return void
+     */
     public function create()
     {
         echo $this->blade()->run('venda.create');
     }
 
+    /**
+     * Salva venda
+     *
+     * @return void
+     */
     public function store()
     {
         $request = json_decode(json_encode($_REQUEST), false);
@@ -81,11 +96,21 @@ class Venda extends Controller
         }
     }
 
+    /**
+     * Mostra venda pelo id
+     *
+     * @return void
+     */
     public function show()
     {
         //
     }
 
+    /**
+     * Deleta venda pelo id
+     *
+     * @return void
+     */
     public function delete()
     {
         //

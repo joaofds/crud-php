@@ -9,7 +9,12 @@ class VendaItem extends ActiveRecord
 {
     public const TABLENAME = 'vendas_itens';
 
-    // busca itens da venda pelo id
+    /**
+     * Busca itens da venda pelo id
+     *
+     * @param integer $id
+     * @return void
+     */
     public static function getItensByIdVenda(int $id)
     {
         $conn = Transaction::get();

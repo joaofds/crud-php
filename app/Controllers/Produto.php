@@ -8,6 +8,11 @@ use App\Models\Categoria;
 
 class Produto extends Controller
 {
+    /**
+     * Mostra view de produtos
+     *
+     * @return void
+     */
     public function index()
     {
         try {
@@ -23,6 +28,11 @@ class Produto extends Controller
         echo $this->blade()->run('produto.index', ['produtos' => $produtos]);
     }
 
+    /**
+     * Mostra view de cadastro de produtos.
+     *
+     * @return void
+     */
     public function create()
     {
         try {
@@ -38,6 +48,11 @@ class Produto extends Controller
         echo $this->blade()->run('produto.create', ['categorias' => $categorias]);
     }
 
+    /**
+     * Salva produto
+     *
+     * @return void
+     */
     public function store()
     {
         $request = json_decode(json_encode($_REQUEST), false);
@@ -75,6 +90,11 @@ class Produto extends Controller
         }
     }
 
+    /**
+     * Mostra produto pelo id
+     *
+     * @return void
+     */
     public function show()
     {
         //
@@ -104,6 +124,11 @@ class Produto extends Controller
         echo json_encode($produtos);
     }
 
+    /**
+     * Deleta produto pelo id
+     *
+     * @return void
+     */
     public function delete()
     {
         //
