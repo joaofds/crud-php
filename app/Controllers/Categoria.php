@@ -50,7 +50,7 @@ class Categoria extends Controller
             Transaction::open();
 
             $categoria = new CategoriaModel();
-            $categoria->nome = $request->categoria;
+            $categoria->nome = strtolower($request->categoria);
             $categoria->percentual = (float) $request->percentual;
             $categoria->data_cadastro = (new \DateTime('now'))->format('Y-m-d H:i:s');
             $saved = $categoria->save();

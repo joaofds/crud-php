@@ -46,7 +46,7 @@ class Produto extends Controller
             Transaction::open();
 
             $produto = new ProdutoModel();
-            $produto->nome = strtoupper($request->produto);
+            $produto->nome = strtolower($request->produto);
             $produto->valor = $request->preco;
             $produto->qtde = $request->qtde;
             $produto->categoria_id = $request->categoria;
@@ -87,7 +87,7 @@ class Produto extends Controller
      */
     public function findByTerm()
     {
-        $term = strtoupper($_POST['term']);
+        $term = strtolower($_POST['term']);
 
         try {
             Transaction::open();
