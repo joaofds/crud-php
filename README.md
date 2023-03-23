@@ -6,6 +6,8 @@ Pequena aplicação MVC com Active Record com rotinas de venda de produtos
 
 Na raiz do projeto e dentro da pasta `/config/database.php` você encontra o arquivo de configuração do banco, basta informar os dados e já está configurado.
 
+Também é necessário fazer a restauração do banco que está dentro da pasta `/sql` na raiz do projeto.
+
 Esse arquivo está predefinido para o drive PostgreSQL:
 
 ```php // template.php
@@ -30,7 +32,7 @@ Instalar as dependências do composer na raiz do projeto (Requer PHP 7.4+).
 composer install
 ```
 
-Rodar o servidor built-in do PHP e acessar localhost:8080 no navegador.
+Navegar até a pasta `/public`, rodar o servidor built-in do PHP e acessar localhost:8080 no seu navegador.
 
 ```bash
 php -S localhost:8080
