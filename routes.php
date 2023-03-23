@@ -18,6 +18,7 @@ $router->get('/', 'Home@index');
 $router->get('/produtos', 'Produto@index');
 $router->get('/produtos/cadastrar', 'Produto@create');
 $router->post('/produtos/salvar', 'Produto@store');
+$router->post('/produtos/find', 'Produto@findByTerm');
 
 // CATEGORIAS
 $router->get('/categorias', 'Categoria@index');

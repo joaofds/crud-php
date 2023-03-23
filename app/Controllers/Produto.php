@@ -46,7 +46,7 @@ class Produto extends Controller
             Transaction::open();
 
             $produto = new ProdutoModel();
-            $produto->nome = $request->produto;
+            $produto->nome = strtoupper($request->produto);
             $produto->valor = $request->preco;
             $produto->qtde = $request->qtde;
             $produto->categoria_id = $request->categoria;
@@ -78,6 +78,30 @@ class Produto extends Controller
     public function show()
     {
         //
+    }
+
+    /**
+     * Busca produto pelo termo passado na request.
+     *
+     * @return void
+     */
+    public function findByTerm()
+    {
+        $term = strtoupper($_POST['term']);
+
+        try {
+            Transaction::open();
+
+            $produtos = ProdutoModel::findByTerm($term);
+
+            Transaction::close();
+        } catch (\Throwable $th) {
+            var_dump($th->getMessage());
+            Transaction::rollback();
+        }
+
+        header('Content-Type: application/json');
+        echo json_encode($produtos);
     }
 
     public function delete()

@@ -22,9 +22,10 @@
             </tr>
         </thead>
         <tbody>
+            @php $count = 1 @endphp
             @foreach($produtos as $produto)
                 <tr>
-                    <td>{{ $produto->id }}</td>
+                    <td>{{ $count++ }}</td>
                     <td>{{ $produto->nome }}</td>
                     <td>R$ {{ $produto->valor }}</td>
                     <td>{{ $produto->qtde }}</td>

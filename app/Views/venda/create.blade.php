@@ -36,46 +36,28 @@
         </div>
         <div class="row">
             <div class="col">
-                <table id="produtos" class="table table-striped" style="width:100%">
+                <table id="produtos" class="table table-striped" style="width:60%">
                     <thead>
                         <tr>
                             <th>#</th>
                             <th>Produto</th>
                             <th>Qtde</th>
                             <th>Preço</th>
-                            <th>Total</th>
                             <th>ICMS UND</th>
                             <th>Total ICMS</th>
+                            <th>Total</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Produto 1</td>
-                            <td>2</td>
-                            <td>R$ 2,50</td>
-                            <td>R$ 5,00</td>
-                            <td>R$ 0,35</td>
-                            <td>R$ 0,70</td>
-                        </tr>
-                        <td>1</td>
-                            <td>Produto 2</td>
-                            <td>5</td>
-                            <td>R$ 3,50</td>
-                            <td>R$ 17,50</td>
-                            <td>R$ 0,32</td>
-                            <td>R$ 1,60</td>
-                        </tr>
-                    </tbody>
+                    <tbody></tbody>
                     <tfoot>
                         <tr>
                             <th></th>
                             <th></th>
                             <th></th>
                             <th></th>
-                            <th>Total: 22,50 </th>
                             <th></th>
-                            <th>Total ICMS: 2,30</th>
+                            <th id="total_icms"></th>
+                            <th id="total-produtos"></th>
                         </tr>
                     </tfoot>
                 </table>
@@ -88,12 +70,111 @@
 
 @push('scripts')
     <script>
+        // para guardar ultimo produto selecionado no select2
+        var produto = null;
+        var produtos = [];
+
         $(document).ready(function() {
-            $('#single-select-field').select2({
-                theme: "bootstrap-5",
-                width: $( this ).data( 'width' ) ? $( this ).data( 'width' ) : $( this ).hasClass( 'w-100' ) ? '100%' : 'style',
-                placeholder: $( this ).data( 'placeholder' ),
+            // event on change do select
+            $('#single-select-field').on('select2:select', function (e) {
+                produto = e.params.data;
             });
+        });
+
+
+        // event on click do botão para inserir na tabela
+        $('#add-produto').on('click', function() {
+            // input de quantidade
+            let qtde = $("#qtde").val();
+
+            // produto atual
+            let preco = produto.preco;
+            let icms_und = ((produto.preco * produto.percentual) / 100).toFixed(2);
+            let icms_total = (((produto.preco * produto.percentual) / 100) * qtde).toFixed(2);
+            let total_itens = (produto.preco * qtde).toFixed(2);
+            
+            if (!produto || qtde == "") {
+                alert('Preencha todos os campos...')
+            } else {
+                // count para imcrementar contagem da tabela
+                let count = $("#produtos").find('tbody tr').length;
+
+                // dados para table body
+                $("#produtos").find('tbody')
+                    .append(
+                    `
+                        <tr>
+                            <td>${count + 1}</td>
+                            <td>${produto.text}</td>
+                            <td>${qtde}</td>
+                            <td>${preco}</td>
+                            <td>${icms_und}</td>
+                            <td>${icms_total}</td>
+                            <td>${total_itens}</td>
+                        </tr>
+                    `
+                )
+
+                // atualiza produto atual no array de produtos
+                produto.icms_und = icms_und;
+                produto.icms_total = icms_total;
+                produto.qtde = qtde;
+                produto.total_itens = total_itens;
+                produtos.push(produto);
+
+                // busca totais no array de produtos
+                let icms = calculaTotal(produtos, 'icms_total');
+                let total = calculaTotal(produtos, 'total_itens');
+
+                // atualiza totais e limpa inputs
+                $('#total_icms').html('Total: ' + icms);
+                $('#total-produtos').html('Total: ' + total);
+                $("#single-select-field").empty();
+                $("#qtde").val('')
+
+            }
+        });
+
+        // funcao para calculo de total de um item dentro de um array de objetos
+        function calculaTotal(array, propriedade) {
+            return array.reduce((acumulador, objeto) => acumulador + parseFloat(objeto[propriedade]), 0).toFixed(2);
+        }
+
+        // select2 e ajax
+        $("#single-select-field").select2({
+            theme: "bootstrap-5",
+            width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '10%' : 'style',
+            placeholder: $(this).data('placeholder'),
+            tags: true,
+            multiple: false,
+            tokenSeparators: [',', ' '],
+            minimumInputLength: 2,
+            minimumResultsForSearch: 10,
+            ajax: {
+                url: '/produtos/find',
+                dataType: "json",
+                type: "POST",
+                data: function (params) {
+                    var queryParameters = {
+                        term: params.term
+                    }
+                    return queryParameters;
+                },
+                processResults: function (data) {
+                    return {
+                        results: $.map(data, function (item) {
+                            return {
+                                id: item.id,
+                                text: item.nome,
+                                preco: item.valor,
+                                categoria: item.categoria,
+                                percentual: item.percentual
+                                
+                            }
+                        })
+                    };
+                }
+            }
         });
     </script>
 @endpush
