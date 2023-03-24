@@ -16,6 +16,7 @@ CREATE TABLE categorias (
     id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     nome VARCHAR(100),
     percentual NUMERIC(9,2),
+    deleted BOOLEAN DEFAULT false,
     data_cadastro TIMESTAMP
 );
 
@@ -25,6 +26,7 @@ CREATE TABLE produtos (
     valor NUMERIC(9,2),
     qtde DECIMAL,
     categoria_id int,
+    deleted BOOLEAN DEFAULT false,
     data_cadastro TIMESTAMP,
     
     CONSTRAINT fk_categorias_produtos
