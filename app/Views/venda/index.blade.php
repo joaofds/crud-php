@@ -72,7 +72,10 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        listagem de itens da venda... (VER CONSOLE)
+        <pre>
+
+            <div id="modal-body"></div>
+        </pre>
       </div>
     </div>
   </div>
@@ -97,6 +100,7 @@
                 .done(function(response) {
                     if(response.code == 200) {
                         console.log(response.data);
+                        $("#modal-body").html(JSON.stringify(response.data, null, 2))
                     }
                 });
         });

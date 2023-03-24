@@ -18,7 +18,7 @@ class Categoria extends ActiveRecord
     {
         $conn = Transaction::get();
 
-        $sql = 'select * from categorias';
+        $sql = 'select * from categorias a where a.deleted = false';
 
         $prepare = $conn->prepare($sql);
         $prepare->execute();

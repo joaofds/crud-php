@@ -18,10 +18,11 @@ class Produto extends ActiveRecord
     {
         $conn = Transaction::get();
 
-        $sql = 'select a.nome, a.valor, a.qtde, a.data_cadastro, b.nome as categoria
+        $sql = 'select a.id, a.nome, a.valor, a.qtde, a.data_cadastro, b.nome as categoria
                 from produtos a
                 join categorias b
-                on a.categoria_id = B.id';
+                on a.categoria_id = b.id
+                where a.deleted = false and b.deleted = false';
 
         $prepare = $conn->prepare($sql);
         $prepare->execute();
@@ -40,10 +41,10 @@ class Produto extends ActiveRecord
     {
         $conn = Transaction::get();
 
-        $sql = "select A.id, A.nome, A.valor, A.qtde, B.nome as categoria, B.percentual
-                from produtos A
-                join categorias B on A.categoria_id = B.id
-                where A.nome like '%$term%'
+        $sql = "select a.id, a.nome, a.valor, a.qtde, b.nome as categoria, b.percentual
+                from produtos a
+                join categorias b on a.categoria_id = b.id
+                where a.nome like '%$term%'
                 order by A.nome
         ";
 

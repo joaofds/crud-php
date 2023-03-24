@@ -17,28 +17,6 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
--- Name: mercado; Type: DATABASE; Schema: -; Owner: postgres
---
-
-CREATE DATABASE mercado WITH TEMPLATE = template0 ENCODING = 'UTF8' LOCALE_PROVIDER = libc LOCALE = 'en_US.utf8';
-
-
-ALTER DATABASE mercado OWNER TO postgres;
-
-\connect mercado
-
-SET statement_timeout = 0;
-SET lock_timeout = 0;
-SET idle_in_transaction_session_timeout = 0;
-SET client_encoding = 'UTF8';
-SET standard_conforming_strings = on;
-SELECT pg_catalog.set_config('search_path', '', false);
-SET check_function_bodies = false;
-SET xmloption = content;
-SET client_min_messages = warning;
-SET row_security = off;
-
---
 -- Name: public; Type: SCHEMA; Schema: -; Owner: postgres
 --
 
@@ -59,6 +37,7 @@ CREATE TABLE public.categorias (
     id integer NOT NULL,
     nome character varying(100),
     percentual numeric(9,2),
+    deleted boolean DEFAULT false,
     data_cadastro timestamp without time zone
 );
 
@@ -117,6 +96,7 @@ CREATE TABLE public.produtos (
     valor numeric(9,2),
     qtde numeric,
     categoria_id integer,
+    deleted boolean DEFAULT false,
     data_cadastro timestamp without time zone
 );
 
@@ -187,8 +167,8 @@ ALTER TABLE public.vendas_itens OWNER TO postgres;
 --
 
 INSERT INTO public.categorias OVERRIDING SYSTEM VALUE VALUES
-	(1, 'biscoitos', 0.18, '2023-03-23 20:41:27.500213'),
-	(2, 'massas', 0.44, '2023-03-23 20:41:27.500213');
+	(1, 'biscoitos', 0.18, false, '2023-03-24 10:58:25.801123'),
+	(2, 'massas', 0.44, false, '2023-03-24 10:58:25.801123');
 
 
 --
@@ -196,7 +176,7 @@ INSERT INTO public.categorias OVERRIDING SYSTEM VALUE VALUES
 --
 
 INSERT INTO public.clientes OVERRIDING SYSTEM VALUE VALUES
-	(1, 'avulso', '12345678911', '2023-03-23 20:41:27.500213');
+	(1, 'avulso', '12345678911', '2023-03-24 10:58:25.801123');
 
 
 --
@@ -204,9 +184,9 @@ INSERT INTO public.clientes OVERRIDING SYSTEM VALUE VALUES
 --
 
 INSERT INTO public.produtos OVERRIDING SYSTEM VALUE VALUES
-	(1, 'rosquinha mabel', 11.49, 60, 1, '2023-03-23 20:41:27.500213'),
-	(2, 'macarrao 500g', 4.90, 70, 2, '2023-03-23 20:41:27.500213'),
-	(3, 'pao frances 50g', 1.19, 100, 2, '2023-03-23 20:41:27.500213');
+	(3, 'pao frances 50g', 1.19, 100, 2, false, '2023-03-24 10:58:25.801123'),
+	(2, 'macarrao 500g', 4.90, 70, 2, false, '2023-03-24 10:58:25.801123'),
+	(1, 'rosquinha mabel', 11.49, 60, 1, false, '2023-03-24 10:58:25.801123');
 
 
 --
@@ -214,8 +194,8 @@ INSERT INTO public.produtos OVERRIDING SYSTEM VALUE VALUES
 --
 
 INSERT INTO public.vendas OVERRIDING SYSTEM VALUE VALUES
-	(1, 1, 47.70, 12.03, '2023-03-23 17:42:27'),
-	(2, 1, 13.37, 5.88, '2023-03-23 18:23:26');
+	(1, 1, 2.38, 1.05, '2023-03-24 08:07:47'),
+	(2, 1, 70.82, 16.22, '2023-03-24 10:01:22');
 
 
 --
@@ -223,11 +203,10 @@ INSERT INTO public.vendas OVERRIDING SYSTEM VALUE VALUES
 --
 
 INSERT INTO public.vendas_itens VALUES
-	(1, 1, 3, 11.49, 34.47, 6.20),
-	(1, 2, 1, 4.90, 4.90, 2.16),
-	(1, 3, 7, 1.19, 8.33, 3.67),
+	(1, 3, 2, 1.19, 2.38, 1.05),
 	(2, 3, 3, 1.19, 3.57, 1.57),
-	(2, 2, 2, 4.90, 9.80, 4.31);
+	(2, 2, 2, 4.90, 9.80, 4.31),
+	(2, 1, 5, 11.49, 57.45, 10.34);
 
 
 --
