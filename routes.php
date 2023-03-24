@@ -19,11 +19,13 @@ $router->get('/produtos', 'Produto@index');
 $router->get('/produtos/cadastrar', 'Produto@create');
 $router->post('/produtos/salvar', 'Produto@store');
 $router->post('/produtos/find', 'Produto@findByTerm');
+$router->post('/produto/delete', 'Produto@delete');
 
 // CATEGORIAS
 $router->get('/categorias', 'Categoria@index');
 $router->get('/categorias/cadastrar', 'Categoria@create');
 $router->post('/categorias/salvar', 'Categoria@store');
+$router->post('/categoria/delete', 'Categoria@delete');
 
 // VENDAS
 $router->get('/vendas', 'Venda@index');

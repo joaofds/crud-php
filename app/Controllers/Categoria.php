@@ -94,6 +94,37 @@ class Categoria extends Controller
      */
     public function delete()
     {
-        //
+        $request = json_decode(json_encode($_REQUEST), false);
+
+        $updated = false;
+
+        try {
+            Transaction::open();
+
+            $categoria = new CategoriaModel();
+            $categoria->id = $request->id;
+            $categoria->deleted = true;
+            $updated = $categoria->save();
+
+            Transaction::close();
+        } catch (\Throwable $th) {
+            Transaction::rollback();
+        }
+
+        header('Content-Type: application/json');
+        if ($updated) {
+            echo json_encode(
+                [
+                    'msg' => 'Categoria removida com sucesso.',
+                    'code' => 200
+                ]
+            );
+        } else {
+            echo json_encode(
+                [
+                    'msg' => 'Oops... erro ao remover categoria.',
+                ]
+            );
+        }
     }
 }
